@@ -23,5 +23,20 @@ double haversineDistance(double lat1, double lon1, double lat2, double lon2) {
     return EARTH_RADIUS * c;
 }
 
+int main(){
+    
+    double lat1, lon1, lat2, lon2;
 
+    cout << "Enter the latitude and longitude of the first point: ";
+    cin >> lat1 >> lon1;
+
+    cout << "Enter the latitude and longitude of the second point: ";
+    cin >> lat2 >> lon2;
+
+    double distance = haversineDistance(lat1, lon1, lat2, lon2);
+
+    cout << "The Haversine distance between the two points is: " << distance << " kilometers." << endl;
+
+    return 0;
+}
 
