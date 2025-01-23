@@ -23,6 +23,26 @@ double haversineDistance(double lat1, double lon1, double lat2, double lon2) {
     return EARTH_RADIUS * c;
 }
 
+// Function to iterate through two vectors of GPS coordinates
+vector<int> findClosestPoints(const vector<pair<double, double>>& array1,
+                              const vector<pair<double, double>>& array2) {
+    vector<int> closestIndices(array1.size());
+    for (size_t i = 0; i < array1.size(); ++i) {
+        double minDistance = numeric_limits<double>::max();
+        int closestIndex = -1;
+        for (size_t j = 0; j < array2.size(); ++j) {
+            double distance = haversineDistance(array1[i].first, array1[i].second,
+                                                array2[j].first, array2[j].second);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = static_cast<int>(j);
+            }
+        }
+        closestIndices[i] = closestIndex;
+    }
+    return closestIndices;
+}
+
 int main(){
     
     double lat1, lon1, lat2, lon2;
@@ -36,6 +56,8 @@ int main(){
     double distance = haversineDistance(lat1, lon1, lat2, lon2);
 
     cout << "The Haversine distance between the two points is: " << distance << " kilometers." << endl;
+
+    
 
     return 0;
 }
